@@ -8,12 +8,12 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Create a new user' })
-  @ApiResponse({ status: 201, description: 'User created successfully' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
+  // @Post()
+  // @ApiOperation({ summary: 'Create a new user' })
+  // @ApiResponse({ status: 201, description: 'User created successfully' })
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.usersService.create(createUserDto);
+  // }
 
   @Get()
   @ApiOperation({ summary: 'Get all users' })
