@@ -37,19 +37,18 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { email } });
   }
 
-  async update(id: string, updateUserDto: Partial<CreateUserDto>): Promise<User> {
+  async findByResetToken(resetToken: string): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { resetToken } });
+  }
+
+  async update(id: string, updateUserDto: Partial<User>): Promise<User> {
     const user = await this.findOne(id);
-    if (updateUserDto.password) {
-      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
-    }
     Object.assign(user, updateUserDto);
     return this.usersRepository.save(user);
   }
 
   async remove(id: string): Promise<void> {
-    const result = await this.usersRepository.delete(id);
-    if (result.affected === 0) {
-      throw new NotFoundException(`User with ID ${id} not found`);
-    }
+    const user = await this.findOne(id);
+    await this.usersRepository.remove(user);
   }
 } 
