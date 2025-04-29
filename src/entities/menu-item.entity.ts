@@ -2,28 +2,25 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDat
 import { Restaurant } from './restaurant.entity';
 import { OrderItem } from './order-item.entity';
 
-@Entity('menu_items')
+@Entity()
 export class MenuItem {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({ length: 100 })
+  @Column()
   name: string;
 
-  @Column({ length: 500 })
+  @Column()
   description: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2 })
   price: number;
+
+  @Column({ nullable: true })
+  imageUrl: string;
 
   @Column({ default: true })
   isAvailable: boolean;
-
-  @Column({ length: 100, nullable: true })
-  imageUrl: string;
-
-  @Column({ length: 50 })
-  category: string;
 
   @ManyToOne(() => Restaurant, restaurant => restaurant.menuItems)
   restaurant: Restaurant;

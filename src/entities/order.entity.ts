@@ -3,16 +3,7 @@ import { User } from './user.entity';
 import { Restaurant } from './restaurant.entity';
 import { OrderItem } from './order-item.entity';
 import { DriverOrder } from './driver-order.entity';
-
-export enum OrderStatus {
-  PENDING = 'pending',
-  CONFIRMED = 'confirmed',
-  PREPARING = 'preparing',
-  READY = 'ready',
-  PICKED_UP = 'picked_up',
-  DELIVERED = 'delivered',
-  CANCELLED = 'cancelled'
-}
+import { OrderStatus } from '../orders/enums/order-status.enum';
 
 @Entity('orders')
 export class Order {

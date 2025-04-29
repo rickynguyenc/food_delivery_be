@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, Up
 import { MenuItem } from './menu-item.entity';
 import { Review } from './review.entity';
 import { Order } from './order.entity';
+import { Promotion } from './promotion.entity';
 
 @Entity('restaurants')
 export class Restaurant {
@@ -32,6 +33,9 @@ export class Restaurant {
   @Column({ type: 'decimal', precision: 5, scale: 2, default: 0 })
   rating: number;
 
+  @Column({ length: 200 })
+  imageUrl: string;
+
   @OneToMany(() => MenuItem, menuItem => menuItem.restaurant)
   menuItems: MenuItem[];
 
@@ -40,6 +44,9 @@ export class Restaurant {
 
   @OneToMany(() => Order, order => order.restaurant)
   orders: Order[];
+
+  @OneToMany(() => Promotion, promotion => promotion.restaurant)
+  promotions: Promotion[];
 
   @CreateDateColumn()
   createdAt: Date;

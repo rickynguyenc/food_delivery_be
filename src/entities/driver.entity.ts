@@ -1,11 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Point } from 'typeorm';
 import { DriverOrder } from './driver-order.entity';
-
-export enum DriverStatus {
-  AVAILABLE = 'available',
-  BUSY = 'busy',
-  OFFLINE = 'offline'
-}
+import { DriverStatus } from '../drivers/enums/driver-status.enum';
 
 @Entity('drivers')
 export class Driver {
@@ -24,10 +19,13 @@ export class Driver {
   @Column({ length: 20 })
   phone: string;
 
-  @Column({ type: 'point' })
-  currentLocation: Point;
+  @Column({ type: 'decimal', precision: 10, scale: 8, nullable: true })
+  currentLatitude: number;
 
-  @Column({ type: 'enum', enum: DriverStatus, default: DriverStatus.OFFLINE })
+  @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
+  currentLongitude: number;
+
+  @Column({ type: 'enum', enum: DriverStatus, default: DriverStatus.AVAILABLE })
   status: DriverStatus;
 
   @Column({ default: true })
